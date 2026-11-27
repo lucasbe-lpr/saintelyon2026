@@ -11,239 +11,128 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-    html, body {
-      height: 100%; width: 100%;
-      margin: 0; padding: 0;
-      overflow: hidden;
-      background: transparent;
-    }
-
+    html, body { height:100%; width:100%; margin:0; padding:0; overflow:hidden; background:transparent; }
     #sl {
-      --blue:     #0068B1;
-      --blue-dk:  #004f87;
-      --blue-lt:  #e8f3fb;
-      --red:      #c0392b;
-      --green:    #1B5E20;
-      --amber:    #F9A825;
-      --gray:     #9E9E9E;
-
-      --bg:       #ffffff;
-      --border:   #e2e5e8;
-      --border-lt:#eeeff1;
-      --text:     #1a1a1a;
-      --muted:    #6b7280;
-
-      --font: 'Merriweather Sans', sans-serif;
-      --shadow-sm: 0 1px 4px rgba(0,0,0,0.07);
-
-      font-family: var(--font);
-      color: var(--text);
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      background: var(--bg);
-      overflow: hidden;
+      --blue:#0068B1; --blue-dk:#004f87; --blue-lt:#e8f3fb; --red:#c0392b;
+      --green:#1B5E20; --amber:#F9A825; --gray:#9E9E9E;
+      --bg:#fff; --border:#e2e5e8; --border-lt:#eeeff1;
+      --text:#1a1a1a; --muted:#6b7280;
+      --font:'Merriweather Sans', sans-serif;
+      --shadow-sm:0 1px 4px rgba(0,0,0,0.07);
+      font-family:var(--font); color:var(--text);
+      width:100%; height:100%;
+      display:flex; flex-direction:column;
+      background:var(--bg); overflow:hidden;
     }
-
-    /* ---------- HEADER ---------- */
     #sl .sl-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 14px 9px;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg);
-      flex-shrink: 0;
-      gap: 10px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 14px 9px; border-bottom:1px solid var(--border);
+      background:var(--bg); flex-shrink:0; gap:10px;
     }
-    #sl .sl-header-left { flex: 1; min-width: 0; }
-    #sl h1 {
-      margin: 0;
-      font-size: 15px; font-weight: 700;
-      color: var(--text); line-height: 1.25;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    #sl .sl-subtitle {
-      font-size: 10px; color: var(--muted); margin-top: 2px;
-      font-weight: 300;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
+    #sl .sl-header-left { flex:1; min-width:0; }
+    #sl h1 { margin:0; font-size:15px; font-weight:700; color:var(--text); line-height:1.25;
+             white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    #sl .sl-subtitle { font-size:10px; color:var(--muted); margin-top:2px; font-weight:300;
+                       white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     #sl .sl-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 6px 11px;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      background: var(--bg);
-      color: var(--muted);
-      font-size: 10px; font-weight: 600;
-      white-space: nowrap; flex-shrink: 0;
+      display:inline-flex; align-items:center; gap:5px;
+      padding:6px 11px; border:1px solid var(--border); border-radius:2px;
+      background:var(--bg); color:var(--muted);
+      font-size:10px; font-weight:600; white-space:nowrap; flex-shrink:0;
     }
-
-    /* ---------- CONTROLS ---------- */
     #sl .sl-controls {
-      padding: 8px 14px 7px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
+      padding:8px 14px 7px; background:var(--bg);
+      border-bottom:1px solid var(--border); flex-shrink:0;
     }
     #sl .sl-label {
-      display: block;
-      font-size: 9.5px; font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 5px;
+      display:block; font-size:9.5px; font-weight:700; color:var(--muted);
+      text-transform:uppercase; letter-spacing:0.8px; margin-bottom:5px;
     }
-    #sl .sl-routes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-    }
+    #sl .sl-routes { display:flex; flex-wrap:wrap; gap:4px; }
     #sl .sl-route {
-      padding: 6px 10px;
-      font-size: 10.5px;
-      font-weight: 700;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.13s;
-      user-select: none;
-      white-space: nowrap;
-      background: var(--bg);
-      font-family: var(--font);
+      padding:6px 10px; font-size:10.5px; font-weight:700;
+      border:1px solid var(--border); border-radius:2px; color:var(--muted);
+      cursor:pointer; transition:all 0.13s; user-select:none; white-space:nowrap;
+      background:var(--bg); font-family:var(--font);
     }
-    #sl .sl-route:hover { border-color: var(--blue); color: var(--blue); }
-    #sl .sl-route.active { background: var(--blue); color: #fff; border-color: var(--blue); }
-
-    /* ---------- MAP ---------- */
-    #sl .sl-map-wrap { position: relative; flex: 1; min-height: 0; z-index: 1; }
-    #sl #sl-map { width: 100%; height: 100%; }
-
+    #sl .sl-route:hover { border-color:var(--blue); color:var(--blue); }
+    #sl .sl-route.active { background:var(--blue); color:#fff; border-color:var(--blue); }
+    #sl .sl-map-wrap { position:relative; flex:1; min-height:0; z-index:1; }
+    #sl #sl-map { width:100%; height:100%; }
     #sl .sl-legend {
-      position: absolute;
-      bottom: 8px; left: 8px; z-index: 500;
-      background: rgba(255,255,255,0.97);
-      border-radius: 2px;
-      padding: 6px 9px;
-      font-size: 10px;
-      box-shadow: var(--shadow-sm);
-      pointer-events: none;
+      position:absolute; bottom:8px; left:8px; z-index:500;
+      background:rgba(255,255,255,0.97); border-radius:2px;
+      padding:6px 9px; font-size:10px; box-shadow:var(--shadow-sm);
+      pointer-events:none;
     }
     #sl .sl-legend-title {
-      font-weight: 700; font-size: 9px; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 4px;
+      font-weight:700; font-size:9px; text-transform:uppercase;
+      color:var(--blue); margin-bottom:4px;
     }
-    #sl .sl-legend-row {
-      display: flex; align-items: center; gap: 5px;
-      margin-bottom: 2px; color: #333;
-    }
-    #sl .sl-legend-dot {
-      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-    }
-
+    #sl .sl-legend-row { display:flex; align-items:center; gap:5px; margin-bottom:2px; color:#333; }
+    #sl .sl-legend-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
     #sl .sl-overlay {
-      position: absolute; inset: 0;
-      background: rgba(255,255,255,0.95); z-index: 1000;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 10px; font-size: 13px; color: var(--muted);
-      opacity: 0; pointer-events: none; transition: opacity 0.22s; text-align: center;
-      padding: 20px;
+      position:absolute; inset:0; background:rgba(255,255,255,0.95);
+      z-index:1000; display:flex; flex-direction:column; align-items:center;
+      justify-content:center; gap:10px; font-size:13px; color:var(--muted);
+      opacity:0; pointer-events:none; transition:opacity 0.22s;
+      text-align:center; padding:20px;
     }
-    #sl .sl-overlay.active { opacity: 1; pointer-events: all; }
+    #sl .sl-overlay.active { opacity:1; pointer-events:all; }
     .sl-spinner {
-      width: 22px; height: 22px;
-      border: 2px solid var(--border); border-top-color: var(--blue);
-      border-radius: 50%; animation: sl-spin 0.75s linear infinite;
+      width:22px; height:22px; border:2px solid var(--border);
+      border-top-color:var(--blue); border-radius:50%;
+      animation:sl-spin 0.75s linear infinite;
     }
-    @keyframes sl-spin { to { transform: rotate(360deg); } }
-
-    /* ---------- ELEVATION ---------- */
+    @keyframes sl-spin { to { transform:rotate(360deg); } }
     #sl .sl-elev-wrap {
-      flex-shrink: 0;
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      position: relative;
-      height: 100px;
+      flex-shrink:0; background:var(--bg); border-top:1px solid var(--border);
+      position:relative; height:100px;
     }
     #sl #sl-elev-svg {
-      display: block;
-      width: 100%;
-      height: 100%;
-      cursor: crosshair;
-      touch-action: none;
+      display:block; width:100%; height:100%; cursor:crosshair; touch-action:none;
     }
     #sl .sl-elev-empty {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; color: var(--muted);
-      background: var(--bg);
+      position:absolute; inset:0; display:flex; align-items:center;
+      justify-content:center; font-size:11px; color:var(--muted); background:var(--bg);
     }
-
-    /* ---------- STATS ---------- */
     #sl .sl-stats {
-      padding: 7px 14px; background: var(--bg); border-top: 1px solid var(--border);
-      flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      padding:7px 14px; background:var(--bg); border-top:1px solid var(--border);
+      flex-shrink:0; display:grid; grid-template-columns:repeat(4,1fr); gap:0;
     }
     #sl .sl-stat {
-      padding: 5px 8px 5px 0;
-      display: flex; flex-direction: column; gap: 1px;
-      border-right: 1px solid var(--border-lt);
+      padding:5px 8px 5px 0; display:flex; flex-direction:column; gap:1px;
+      border-right:1px solid var(--border-lt);
     }
-    #sl .sl-stat:last-child { border-right: none; }
-    #sl .sl-stat:not(:first-child) { padding-left: 10px; }
-    #sl .sl-stat-label {
-      font-size: 8.5px; font-weight: 700; color: var(--muted);
-      text-transform: uppercase;
-    }
-    #sl .sl-stat-value {
-      font-size: 13.5px; font-weight: 700; color: var(--blue);
-      font-variant-numeric: tabular-nums; line-height: 1.1;
-    }
-    #sl .sl-stat-sub {
-      font-size: 8.5px; color: var(--muted);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      text-transform: uppercase;
-    }
-
-    /* ---------- FOOTER ---------- */
+    #sl .sl-stat:last-child { border-right:none; }
+    #sl .sl-stat:not(:first-child) { padding-left:10px; }
+    #sl .sl-stat-label { font-size:8.5px; font-weight:700; color:var(--muted); text-transform:uppercase; }
+    #sl .sl-stat-value { font-size:13.5px; font-weight:700; color:var(--blue); font-variant-numeric:tabular-nums; line-height:1.1; }
+    #sl .sl-stat-sub { font-size:8.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-transform:uppercase; }
     #sl footer {
-      padding: 4px 14px; background: var(--bg); border-top: 1px solid var(--border-lt);
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 9px; color: #b0b5bc; flex-shrink: 0;
+      padding:4px 14px; background:var(--bg); border-top:1px solid var(--border-lt);
+      display:flex; justify-content:space-between; align-items:center;
+      font-size:9px; color:#b0b5bc; flex-shrink:0;
     }
-    #sl footer a { color: #b0b5bc; text-decoration: none; }
-    #sl footer a:hover { color: var(--blue); }
-
-    /* ---------- LEAFLET TOOLTIPS ---------- */
+    #sl footer a { color:#b0b5bc; text-decoration:none; }
+    #sl footer a:hover { color:var(--blue); }
     .leaflet-tooltip {
-      font-family: var(--font) !important;
-      font-size: 10px !important;
-      font-weight: 700 !important;
-      background: #fff !important;
-      border: 1px solid var(--border) !important;
-      border-radius: 2px !important;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1) !important;
-      padding: 3px 7px !important;
-      color: var(--text) !important;
+      font-family:var(--font) !important; font-size:10px !important;
+      font-weight:700 !important; background:#fff !important;
+      border:1px solid var(--border) !important; border-radius:2px !important;
+      box-shadow:0 1px 4px rgba(0,0,0,0.1) !important;
+      padding:3px 7px !important; color:var(--text) !important;
     }
-    .leaflet-tooltip-top:before,
-    .leaflet-tooltip-bottom:before { display: none; }
-
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 540px) {
-      #sl .sl-route { font-size: 10px; padding: 5px 8px; }
-      #sl .sl-elev-wrap { height: 80px; }
+    .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before { display:none; }
+    @media (max-width:540px) {
+      #sl .sl-route { font-size:10px; padding:5px 8px; }
+      #sl .sl-elev-wrap { height:80px; }
     }
-    @media (max-width: 440px) {
-      #sl .sl-stats { grid-template-columns: repeat(2, 1fr); }
-      #sl .sl-stat:nth-child(2n) { border-right: none; }
-      #sl .sl-stat:nth-child(odd) { padding-left: 0; }
-      #sl .sl-stat:nth-child(n+3) {
-        border-top: 1px solid var(--border-lt);
-        padding-top: 6px; margin-top: 2px;
-      }
+    @media (max-width:440px) {
+      #sl .sl-stats { grid-template-columns:repeat(2,1fr); }
+      #sl .sl-stat:nth-child(2n) { border-right:none; }
+      #sl .sl-stat:nth-child(odd) { padding-left:0; }
+      #sl .sl-stat:nth-child(n+3) { border-top:1px solid var(--border-lt); padding-top:6px; margin-top:2px; }
     }
   </style>
 </head>
@@ -327,57 +216,40 @@
 (function () {
   'use strict';
 
-  /* ================================================================
-     ⚙️ CONFIGURATION — À PERSONNALISER
-     1. baseUrl : où sont hébergés les .gpx sur GitHub
-        - GitHub raw   : 'https://raw.githubusercontent.com/lucasbe-lpr/saintelyon2026/refs/heads/main/routes/'
-        - GitHub Pages : 'https://USER.github.io/REPO/routes/'
-     2. routes : liste des parcours (id unique, nom affiché, fichier .gpx)
-  ================================================================ */
+  /* ==============================================================
+     ⚙️ CONFIG — REMPLACEZ USERNAME/REPO
+  ============================================================== */
   const CONFIG = {
-  baseUrl: 'https://raw.githubusercontent.com/USERNAME/REPO/main/routes/',
-  routes: [
-    { id: 'lyonsaintelyon', name: 'LyonSaintéLyon', files: ['ALLER LYONSAINTÉLYON.gpx', 'RETOUR LYONSAINTÉLYON.gpx'] },
-    { id: 'saintelyon',     name: 'SaintéLyon',     files: ['SAINTÉLYON.gpx'] },
-    { id: 'saintesprint',   name: 'SaintéSprint',   files: ['SAINTÉSPRINT.gpx'] },
-    { id: 'saintetic',      name: 'SaintéTic',      files: ['SAINTÉTIC.gpx'] },
-    { id: 'saintevia',      name: 'SaintéVia',      files: ['SAINTÉVIA.gpx'] },
-    { id: 'saintexpress',   name: 'SaintExpress',   files: ['SAINTEXPRESS.gpx'] }
-  ]
-};
+    baseUrl: 'https://raw.githubusercontent.com/USERNAME/REPO/main/routes/',
+    routes: [
+      { id: 'lyonsaintelyon', name: 'LyonSaintéLyon', files: ['ALLER LYONSAINTÉLYON.gpx', 'RETOUR LYONSAINTÉLYON.gpx'] },
+      { id: 'saintelyon',     name: 'SaintéLyon',     files: ['SAINTÉLYON.gpx'] },
+      { id: 'saintesprint',   name: 'SaintéSprint',   files: ['SAINTÉSPRINT.gpx'] },
+      { id: 'saintetic',      name: 'SaintéTic',      files: ['SAINTÉTIC.gpx'] },
+      { id: 'saintevia',      name: 'SaintéVia',      files: ['SAINTÉVIA.gpx'] },
+      { id: 'saintexpress',   name: 'SaintExpress',   files: ['SAINTEXPRESS.gpx'] }
+    ]
+  };
 
-  /* ================================================================
-     STATE
-  ================================================================ */
   const state = {
-    map: null,
-    activeId: null,
-    cache: {},
+    map: null, activeId: null, cache: {},
     layers: { polyline: null, start: null, end: null, hover: null },
     currentData: null
   };
-
   const $ = id => document.getElementById(id);
 
-  /* ================================================================
-     UTILS
-  ================================================================ */
+  /* ---------- utils ---------- */
   function haversine(lat1, lon1, lat2, lon2) {
-    const R = 6371000;
-    const toRad = Math.PI / 180;
-    const dLat = (lat2 - lat1) * toRad;
-    const dLon = (lon2 - lon1) * toRad;
-    const a = Math.sin(dLat / 2) ** 2 +
-              Math.cos(lat1 * toRad) * Math.cos(lat2 * toRad) * Math.sin(dLon / 2) ** 2;
+    const R = 6371000, toRad = Math.PI / 180;
+    const dLat = (lat2 - lat1) * toRad, dLon = (lon2 - lon1) * toRad;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*toRad)*Math.cos(lat2*toRad)*Math.sin(dLon/2)**2;
     return 2 * R * Math.asin(Math.sqrt(a));
   }
-
   function smooth(values, window) {
-    const half = Math.floor(window / 2);
-    const out = new Array(values.length);
+    const half = Math.floor(window / 2), out = new Array(values.length);
     for (let i = 0; i < values.length; i++) {
       let sum = 0, n = 0;
-      for (let j = Math.max(0, i - half); j <= Math.min(values.length - 1, i + half); j++) {
+      for (let j = Math.max(0, i-half); j <= Math.min(values.length-1, i+half); j++) {
         const v = values[j];
         if (v != null && isFinite(v)) { sum += v; n++; }
       }
@@ -385,166 +257,108 @@
     }
     return out;
   }
-
-  function fmt(n, decimals) {
+  function fmt(n, d) {
     if (n == null || !isFinite(n)) return '—';
-    return n.toLocaleString('fr-FR', {
-      minimumFractionDigits: decimals || 0,
-      maximumFractionDigits: decimals || 0
-    });
+    return n.toLocaleString('fr-FR', { minimumFractionDigits: d||0, maximumFractionDigits: d||0 });
   }
 
-  /* ================================================================
-     GPX PARSER
-  ================================================================ */
+  /* ---------- GPX ---------- */
   function parseGPX(xmlText) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(xmlText, 'application/xml');
+    const doc = new DOMParser().parseFromString(xmlText, 'application/xml');
     if (doc.querySelector('parsererror')) throw new Error('Fichier GPX invalide');
-
-    // Récupération namespace-safe (certains GPX déclarent un xmlns)
     const nsGet = (parent, tag) => {
       let els = parent.getElementsByTagNameNS('*', tag);
       if (!els.length) els = parent.getElementsByTagName(tag);
       return Array.from(els);
     };
-
     let nodes = nsGet(doc, 'trkpt');
-    if (!nodes.length) nodes = nsGet(doc, 'rtept'); // fallback: routes
-
+    if (!nodes.length) nodes = nsGet(doc, 'rtept');
     const points = [];
     for (const pt of nodes) {
       const lat = parseFloat(pt.getAttribute('lat'));
       const lon = parseFloat(pt.getAttribute('lon'));
       if (!isFinite(lat) || !isFinite(lon)) continue;
-
       const eleEl = nsGet(pt, 'ele')[0];
       const ele = eleEl ? parseFloat(eleEl.textContent) : null;
       points.push({ lat, lon, ele: isFinite(ele) ? ele : null });
     }
-
     if (!points.length) throw new Error('Aucun point dans le GPX');
     return points;
   }
 
-  /* ================================================================
-     COMPUTE ROUTE DATA
-  ================================================================ */
+  /* ---------- compute ---------- */
   function computeRouteData(points) {
-    const distances = [0];
-    const rawEle = [];
+    const distances = [0], rawEle = [];
     const bounds = L.latLngBounds();
-
     for (let i = 0; i < points.length; i++) {
       bounds.extend([points[i].lat, points[i].lon]);
       rawEle.push(points[i].ele);
       if (i > 0) {
-        const d = haversine(
-          points[i - 1].lat, points[i - 1].lon,
-          points[i].lat, points[i].lon
-        );
-        distances.push(distances[i - 1] + d);
+        distances.push(distances[i-1] + haversine(points[i-1].lat, points[i-1].lon, points[i].lat, points[i].lon));
       }
     }
-
-    const totalDist = distances[distances.length - 1];
-
-    // Profil altimétrique (lissé légèrement pour éviter le bruit GPS)
+    const totalDist = distances[distances.length-1];
     const hasEle = rawEle.some(e => e != null);
     const smoothed = hasEle ? smooth(rawEle, 5) : null;
-
     let dPlus = 0, dMinus = 0, altMin = null, altMax = null;
-
     if (smoothed) {
       for (let i = 1; i < smoothed.length; i++) {
-        if (smoothed[i] == null || smoothed[i - 1] == null) continue;
-        const delta = smoothed[i] - smoothed[i - 1];
-        if (delta > 0) dPlus += delta;
-        else dMinus += -delta;
+        if (smoothed[i] == null || smoothed[i-1] == null) continue;
+        const d = smoothed[i] - smoothed[i-1];
+        if (d > 0) dPlus += d; else dMinus += -d;
       }
       const valid = smoothed.filter(e => e != null);
-      if (valid.length) {
-        altMin = Math.min.apply(null, valid);
-        altMax = Math.max.apply(null, valid);
-      }
+      if (valid.length) { altMin = Math.min.apply(null, valid); altMax = Math.max.apply(null, valid); }
     }
-
-    return {
-      points,
-      distances,
-      elevations: smoothed,
-      stats: { distance: totalDist, dPlus, dMinus, altMin, altMax },
-      bounds
-    };
+    return { points, distances, elevations: smoothed,
+             stats: { distance: totalDist, dPlus, dMinus, altMin, altMax }, bounds };
   }
 
-  /* ================================================================
-     CHARGEMENT D'UN PARCOURS
-  ================================================================ */
+  /* ---------- load ---------- */
   async function fetchGPXPoints(file) {
-  const url = CONFIG.baseUrl + encodeURIComponent(file);
-  const resp = await fetch(url);
-  if (!resp.ok) throw new Error(`HTTP ${resp.status} — ${file}`);
-  const text = await resp.text();
-  return parseGPX(text);
-}
-
-async function loadRoute(id) {
-  if (state.activeId === id && state.currentData) return;
-
-  state.activeId = id;
-  updateRouteButtons(id);
-
-  if (state.cache[id]) {
-    state.currentData = state.cache[id];
-    render();
-    return;
+    const url = CONFIG.baseUrl + encodeURIComponent(file);
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status} — ${file}`);
+    return parseGPX(await resp.text());
   }
 
-  showLoader(true);
-  hideError();
+  async function loadRoute(id) {
+    if (state.activeId === id && state.currentData) return;
+    state.activeId = id;
+    updateRouteButtons(id);
 
-  try {
-    const route = CONFIG.routes.find(r => r.id === id);
-    if (!route) throw new Error('Parcours inconnu');
+    if (state.cache[id]) { state.currentData = state.cache[id]; render(); return; }
 
-    const files  = route.files || [route.file];
-    const arrays = await Promise.all(files.map(fetchGPXPoints));
+    showLoader(true); hideError();
+    try {
+      const route = CONFIG.routes.find(r => r.id === id);
+      if (!route) throw new Error('Parcours inconnu');
+      const files = route.files || [route.file];
+      const arrays = await Promise.all(files.map(fetchGPXPoints));
 
-    // Concaténation : on évite le doublon au point de jonction (Sainté)
-    let points = [];
-    for (const arr of arrays) {
-      if (!arr.length) continue;
-      if (!points.length) { points = arr.slice(); continue; }
-      const last  = points[points.length - 1];
-      const first = arr[0];
-      const gap   = haversine(last.lat, last.lon, first.lat, first.lon);
-      // < 100 m => point de jonction déjà présent, on saute le doublon
-      points = points.concat(gap < 100 ? arr.slice(1) : arr);
-    }
-    if (!points.length) throw new Error('Aucun point dans les GPX');
+      let points = [];
+      for (const arr of arrays) {
+        if (!arr.length) continue;
+        if (!points.length) { points = arr.slice(); continue; }
+        const last = points[points.length-1], first = arr[0];
+        const gap = haversine(last.lat, last.lon, first.lat, first.lon);
+        points = points.concat(gap < 100 ? arr.slice(1) : arr);
+      }
+      if (!points.length) throw new Error('Aucun point dans les GPX');
 
-    const data = computeRouteData(points);
-    data.name = route.name;
-    data.id   = id;
-    state.cache[id] = data;
+      const data = computeRouteData(points);
+      data.name = route.name;
+      data.id = id;
+      state.cache[id] = data;
 
-    if (state.activeId === id) {
-      state.currentData = data;
-      render();
-    }
-  } catch (e) {
-    console.error('[GPX]', e);
-    if (state.activeId === id) {
-      showLoader(false);
-      showError(e.message || 'Impossible de charger le fichier GPX.');
+      if (state.activeId === id) { state.currentData = data; render(); }
+    } catch (e) {
+      console.error('[GPX]', e);
+      if (state.activeId === id) { showLoader(false); showError(e.message || 'Impossible de charger le GPX.'); }
     }
   }
-}
 
-  /* ================================================================
-     RENDER GLOBAL
-  ================================================================ */
+  /* ---------- render ---------- */
   function render() {
     if (!state.currentData) return;
     showLoader(false);
@@ -554,174 +368,102 @@ async function loadRoute(id) {
     renderSubtitle(state.currentData);
   }
 
-  /* ================================================================
-     CARTE
-  ================================================================ */
   function renderMap(data) {
-    Object.values(state.layers).forEach(l => {
-      if (l && state.map.hasLayer(l)) state.map.removeLayer(l);
-    });
+    Object.values(state.layers).forEach(l => { if (l && state.map.hasLayer(l)) state.map.removeLayer(l); });
     state.layers = { polyline: null, start: null, end: null, hover: null };
-
     const latlngs = data.points.map(p => [p.lat, p.lon]);
 
-    // Tracé
     state.layers.polyline = L.polyline(latlngs, {
-      color: '#0068B1',
-      weight: 4,
-      opacity: 0.9,
-      lineJoin: 'round',
-      lineCap: 'round'
+      color: '#0068B1', weight: 4, opacity: 0.9, lineJoin: 'round', lineCap: 'round'
     }).addTo(state.map);
 
-    // Départ
-    const startIcon = L.divIcon({
-      className: '',
-      html: '<div style="width:14px;height:14px;background:#1B5E20;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.35)"></div>',
-      iconSize: [14, 14],
-      iconAnchor: [7, 7]
-    });
-    state.layers.start = L.marker(latlngs[0], { icon: startIcon })
-      .bindTooltip('Départ', { direction: 'top', offset: [0, -8] })
-      .addTo(state.map);
+    state.layers.start = L.marker(latlngs[0], { icon: L.divIcon({
+      className: '', iconSize: [14,14], iconAnchor: [7,7],
+      html: '<div style="width:14px;height:14px;background:#1B5E20;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.35)"></div>'
+    })}).bindTooltip('Départ', { direction: 'top', offset: [0,-8] }).addTo(state.map);
 
-    // Arrivée
-    const endIcon = L.divIcon({
-      className: '',
-      html: '<div style="width:14px;height:14px;background:#c0392b;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.35)"></div>',
-      iconSize: [14, 14],
-      iconAnchor: [7, 7]
-    });
-    state.layers.end = L.marker(latlngs[latlngs.length - 1], { icon: endIcon })
-      .bindTooltip('Arrivée', { direction: 'top', offset: [0, -8] })
-      .addTo(state.map);
+    state.layers.end = L.marker(latlngs[latlngs.length-1], { icon: L.divIcon({
+      className: '', iconSize: [14,14], iconAnchor: [7,7],
+      html: '<div style="width:14px;height:14px;background:#c0392b;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.35)"></div>'
+    })}).bindTooltip('Arrivée', { direction: 'top', offset: [0,-8] }).addTo(state.map);
 
-    // Marqueur de survol (caché)
     state.layers.hover = L.circleMarker(latlngs[0], {
-      radius: 6,
-      color: '#fff',
-      fillColor: '#0068B1',
-      fillOpacity: 1,
-      weight: 2,
-      opacity: 0
+      radius: 6, color: '#fff', fillColor: '#0068B1', fillOpacity: 1, weight: 2, opacity: 0
     }).addTo(state.map);
 
     state.map.fitBounds(data.bounds, { padding: [20, 20] });
   }
 
-  /* ================================================================
-     STATS
-  ================================================================ */
   function renderStats(data) {
     const s = data.stats;
-    $('stat-dist').textContent   = fmt(s.distance / 1000, 1) + ' km';
+    $('stat-dist').textContent   = fmt(s.distance/1000, 1) + ' km';
     $('stat-dplus').textContent  = fmt(s.dPlus, 0) + ' m';
     $('stat-altmax').textContent = s.altMax != null ? fmt(s.altMax, 0) + ' m' : '—';
     $('stat-altmin').textContent = s.altMin != null ? fmt(s.altMin, 0) + ' m' : '—';
-    $('stat-altmax-sub').textContent = s.altMax != null ? 'point culminant' : 'indisponible';
   }
-
   function renderSubtitle(data) {
     const s = data.stats;
     let txt = data.name;
-    if (s.distance) txt += ' · ' + fmt(s.distance / 1000, 1) + ' km';
+    if (s.distance) txt += ' · ' + fmt(s.distance/1000, 1) + ' km';
     if (s.dPlus)    txt += ' · D+ ' + fmt(s.dPlus, 0) + ' m';
     $('sl-subtitle').textContent = txt;
   }
 
-  /* ================================================================
-     PROFIL ALTIMÉTRIQUE (SVG)
-  ================================================================ */
+  /* ---------- profil ---------- */
   function renderElevation(data) {
-    const svg = $('sl-elev-svg');
-    const emptyEl = $('sl-elev-empty');
-    const container = $('sl-elev-wrap');
-
+    const svg = $('sl-elev-svg'), emptyEl = $('sl-elev-empty'), container = $('sl-elev-wrap');
     if (!data.elevations || data.stats.altMin == null) {
-      svg.innerHTML = '';
-      svg.style.display = 'none';
-      emptyEl.style.display = 'flex';
-      return;
+      svg.innerHTML = ''; svg.style.display = 'none'; emptyEl.style.display = 'flex'; return;
     }
-    svg.style.display = 'block';
-    emptyEl.style.display = 'none';
-
-    const W = container.clientWidth;
-    const H = container.clientHeight;
+    svg.style.display = 'block'; emptyEl.style.display = 'none';
+    const W = container.clientWidth, H = container.clientHeight;
     if (W < 10 || H < 10) return;
 
-    const pad = { top: 16, right: 16, bottom: 22, left: 16 };
-    const cw = W - pad.left - pad.right;
-    const ch = H - pad.top - pad.bottom;
-
+    const pad = { top:16, right:16, bottom:22, left:16 };
+    const cw = W - pad.left - pad.right, ch = H - pad.top - pad.bottom;
     const { distances, elevations, stats } = data;
-    const totalDist = distances[distances.length - 1];
+    const totalDist = distances[distances.length-1];
     if (totalDist === 0) return;
 
-    const minE = stats.altMin;
-    const maxE = stats.altMax;
-    const eRange = (maxE - minE) || 1;
+    const minE = stats.altMin, maxE = stats.altMax, eRange = (maxE-minE)||1;
+    const xS = d => pad.left + (d/totalDist)*cw;
+    const yS = e => pad.top + ch - ((e-minE)/eRange)*ch;
 
-    const xS = d => pad.left + (d / totalDist) * cw;
-    const yS = e => pad.top + ch - ((e - minE) / eRange) * ch;
-
-    // Échantillonnage pour alléger le SVG si GPX très dense
-    const N = elevations.length;
-    const step = Math.max(1, Math.floor(N / 1200));
-
-    let lineParts = [];
-    let areaParts = [];
-
+    const N = elevations.length, step = Math.max(1, Math.floor(N/1200));
+    let lineParts = [], areaParts = [];
     const firstE = elevations[0] != null ? elevations[0] : minE;
     lineParts.push(`M ${xS(0).toFixed(1)} ${yS(firstE).toFixed(1)}`);
-    areaParts.push(`M ${xS(0).toFixed(1)} ${(pad.top + ch).toFixed(1)} L ${xS(0).toFixed(1)} ${yS(firstE).toFixed(1)}`);
-
+    areaParts.push(`M ${xS(0).toFixed(1)} ${(pad.top+ch).toFixed(1)} L ${xS(0).toFixed(1)} ${yS(firstE).toFixed(1)}`);
     for (let i = step; i < N; i += step) {
       const e = elevations[i] != null ? elevations[i] : minE;
-      const x = xS(distances[i]).toFixed(1);
-      const y = yS(e).toFixed(1);
-      lineParts.push(`L ${x} ${y}`);
-      areaParts.push(`L ${x} ${y}`);
+      const x = xS(distances[i]).toFixed(1), y = yS(e).toFixed(1);
+      lineParts.push(`L ${x} ${y}`); areaParts.push(`L ${x} ${y}`);
     }
-
-    // Dernier point
-    const lastE = elevations[N - 1] != null ? elevations[N - 1] : minE;
-    const lastX = xS(totalDist).toFixed(1);
-    const lastY = yS(lastE).toFixed(1);
-    lineParts.push(`L ${lastX} ${lastY}`);
-    areaParts.push(`L ${lastX} ${lastY}`);
-    areaParts.push(`L ${xS(totalDist).toFixed(1)} ${(pad.top + ch).toFixed(1)} Z`);
-
-    const linePath = lineParts.join(' ');
-    const areaPath = areaParts.join(' ');
-
-    const maxLabel   = fmt(maxE, 0) + ' m';
-    const minLabel   = fmt(minE, 0) + ' m';
-    const startLabel = '0 km';
-    const endLabel   = fmt(totalDist / 1000, 0) + ' km';
+    const lastE = elevations[N-1] != null ? elevations[N-1] : minE;
+    lineParts.push(`L ${xS(totalDist).toFixed(1)} ${yS(lastE).toFixed(1)}`);
+    areaParts.push(`L ${xS(totalDist).toFixed(1)} ${yS(lastE).toFixed(1)}`);
+    areaParts.push(`L ${xS(totalDist).toFixed(1)} ${(pad.top+ch).toFixed(1)} Z`);
 
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
     svg.innerHTML = `
-      <defs>
-        <linearGradient id="sl-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stop-color="#0068B1" stop-opacity="0.38"/>
-          <stop offset="100%" stop-color="#0068B1" stop-opacity="0.02"/>
-        </linearGradient>
-      </defs>
-      <path d="${areaPath}" fill="url(#sl-grad)"/>
-      <path d="${linePath}" fill="none" stroke="#0068B1" stroke-width="1.6"
+      <defs><linearGradient id="sl-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0068B1" stop-opacity="0.38"/>
+        <stop offset="100%" stop-color="#0068B1" stop-opacity="0.02"/>
+      </linearGradient></defs>
+      <path d="${areaParts.join(' ')}" fill="url(#sl-grad)"/>
+      <path d="${lineParts.join(' ')}" fill="none" stroke="#0068B1" stroke-width="1.6"
             stroke-linejoin="round" stroke-linecap="round"/>
-      <text x="${pad.left + 2}" y="${pad.top - 4}" font-family="Merriweather Sans, sans-serif"
-            font-size="9" font-weight="700" fill="#0068B1">${maxLabel}</text>
-      <text x="${pad.left + 2}" y="${pad.top + ch + 12}" font-family="Merriweather Sans, sans-serif"
-            font-size="9" font-weight="700" fill="#9E9E9E">${minLabel}</text>
-      <text x="${(pad.left + cw).toFixed(1)}" y="${H - 4}" text-anchor="end"
+      <text x="${pad.left+2}" y="${pad.top-4}" font-family="Merriweather Sans, sans-serif"
+            font-size="9" font-weight="700" fill="#0068B1">${fmt(maxE,0)} m</text>
+      <text x="${pad.left+2}" y="${pad.top+ch+12}" font-family="Merriweather Sans, sans-serif"
+            font-size="9" font-weight="700" fill="#9E9E9E">${fmt(minE,0)} m</text>
+      <text x="${(pad.left+cw).toFixed(1)}" y="${H-4}" text-anchor="end"
             font-family="Merriweather Sans, sans-serif" font-size="9" font-weight="600"
-            fill="#9E9E9E">${endLabel}</text>
-      <text x="${pad.left}" y="${H - 4}" font-family="Merriweather Sans, sans-serif"
-            font-size="9" font-weight="600" fill="#9E9E9E">${startLabel}</text>
+            fill="#9E9E9E">${fmt(totalDist/1000,0)} km</text>
+      <text x="${pad.left}" y="${H-4}" font-family="Merriweather Sans, sans-serif"
+            font-size="9" font-weight="600" fill="#9E9E9E">0 km</text>
       <g id="sl-hover-g" style="display:none;pointer-events:none">
-        <line id="sl-hover-line" x1="0" y1="${pad.top}" x2="0" y2="${pad.top + ch}"
+        <line id="sl-hover-line" x1="0" y1="${pad.top}" x2="0" y2="${pad.top+ch}"
               stroke="#0068B1" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
         <circle id="sl-hover-dot" r="3.5" fill="#0068B1" stroke="#fff" stroke-width="1.5"/>
         <rect id="sl-hover-bg" x="0" y="0" width="100" height="16" rx="2"
@@ -729,18 +471,15 @@ async function loadRoute(id) {
         <text id="sl-hover-txt" x="0" y="0" font-family="Merriweather Sans, sans-serif"
               font-size="9.5" font-weight="700" fill="#fff" text-anchor="middle">0 km · 0 m</text>
       </g>
-      <rect id="sl-hover-capture" x="0" y="0" width="${W}" height="${H}" fill="transparent"/>
-    `;
+      <rect id="sl-hover-capture" x="0" y="0" width="${W}" height="${H}" fill="transparent"/>`;
 
-    data._scales = { xS, yS, pad, cw, ch, totalDist, W, H, minE, maxE };
+    data._scales = { xS, yS, pad, cw, totalDist, W, minE };
     attachElevHover(data);
   }
 
   function attachElevHover(data) {
-    const svg = $('sl-elev-svg');
-    const capture = $('sl-hover-capture');
+    const svg = $('sl-elev-svg'), capture = $('sl-hover-capture');
     if (!capture) return;
-
     const { distances, elevations, points } = data;
     const { xS, yS, pad, cw, totalDist, W, minE } = data._scales;
 
@@ -748,128 +487,78 @@ async function loadRoute(id) {
       const rect = svg.getBoundingClientRect();
       const px = evt.clientX - rect.left;
       if (px < pad.left || px > pad.left + cw) return;
-
       const d = ((px - pad.left) / cw) * totalDist;
-
-      // Recherche binaire du point le plus proche
       let lo = 0, hi = distances.length - 1;
       while (lo < hi) {
         const mid = (lo + hi) >> 1;
-        if (distances[mid] < d) lo = mid + 1;
-        else hi = mid;
+        if (distances[mid] < d) lo = mid + 1; else hi = mid;
       }
       let idx = lo;
-      if (idx > 0 && Math.abs(distances[idx - 1] - d) < Math.abs(distances[idx] - d)) idx--;
-
+      if (idx > 0 && Math.abs(distances[idx-1]-d) < Math.abs(distances[idx]-d)) idx--;
       const e = elevations[idx] != null ? elevations[idx] : minE;
-      const x = xS(distances[idx]);
-      const y = yS(e);
-
-      const line = $('sl-hover-line');
-      const dot  = $('sl-hover-dot');
-      const bg   = $('sl-hover-bg');
-      const txt  = $('sl-hover-txt');
-      const g    = $('sl-hover-g');
+      const x = xS(distances[idx]), y = yS(e);
+      const line=$('sl-hover-line'), dot=$('sl-hover-dot'), bg=$('sl-hover-bg'),
+            txt=$('sl-hover-txt'), g=$('sl-hover-g');
       if (!g) return;
-
       g.style.display = 'block';
       line.setAttribute('x1', x); line.setAttribute('x2', x);
-      dot.setAttribute('cx', x);  dot.setAttribute('cy', y);
-
-      const label = fmt(distances[idx] / 1000, 1) + ' km · ' + fmt(e, 0) + ' m';
+      dot.setAttribute('cx', x); dot.setAttribute('cy', y);
+      const label = fmt(distances[idx]/1000, 1) + ' km · ' + fmt(e, 0) + ' m';
       txt.textContent = label;
-
       const txtWidth = label.length * 5.5 + 16;
       let tx = x;
-      if (tx - txtWidth / 2 < pad.left) tx = pad.left + txtWidth / 2;
-      if (tx + txtWidth / 2 > W - pad.right) tx = W - pad.right - txtWidth / 2;
-
-      let ty = y - 24;
-      if (ty < 1) ty = y + 8;
-
-      bg.setAttribute('x', tx - txtWidth / 2);
-      bg.setAttribute('y', ty);
+      if (tx - txtWidth/2 < pad.left) tx = pad.left + txtWidth/2;
+      if (tx + txtWidth/2 > W - pad.right) tx = W - pad.right - txtWidth/2;
+      let ty = y - 24; if (ty < 1) ty = y + 8;
+      bg.setAttribute('x', tx-txtWidth/2); bg.setAttribute('y', ty);
       bg.setAttribute('width', txtWidth);
-      txt.setAttribute('x', tx);
-      txt.setAttribute('y', ty + 12);
-
-      const pt = points[idx];
+      txt.setAttribute('x', tx); txt.setAttribute('y', ty+12);
       if (state.layers.hover) {
+        const pt = points[idx];
         state.layers.hover.setLatLng([pt.lat, pt.lon]);
         state.layers.hover.setStyle({ opacity: 1 });
       }
     }
-
     function onLeave() {
-      const g = $('sl-hover-g');
-      if (g) g.style.display = 'none';
+      const g = $('sl-hover-g'); if (g) g.style.display = 'none';
       if (state.layers.hover) state.layers.hover.setStyle({ opacity: 0 });
     }
-
     capture.addEventListener('mousemove', onMove);
     capture.addEventListener('mouseleave', onLeave);
-    capture.addEventListener('touchmove', e => {
-      if (e.touches[0]) onMove(e.touches[0]);
-    }, { passive: true });
+    capture.addEventListener('touchmove', e => { if (e.touches[0]) onMove(e.touches[0]); }, { passive:true });
     capture.addEventListener('touchend', onLeave);
   }
 
-  /* ================================================================
-     UI HELPERS
-  ================================================================ */
+  /* ---------- UI helpers ---------- */
   function buildRouteButtons() {
-    const container = $('sl-routes');
-    container.innerHTML = '';
+    const c = $('sl-routes'); c.innerHTML = '';
     CONFIG.routes.forEach(r => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'sl-route';
-      btn.dataset.route = r.id;
-      btn.textContent = r.name;
-      btn.addEventListener('click', () => {
-        if (state.activeId !== r.id) loadRoute(r.id);
-      });
-      container.appendChild(btn);
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'sl-route';
+      b.dataset.route = r.id; b.textContent = r.name;
+      b.addEventListener('click', () => { if (state.activeId !== r.id) loadRoute(r.id); });
+      c.appendChild(b);
     });
   }
-
   function updateRouteButtons(id) {
-    document.querySelectorAll('.sl-route').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.route === id);
-    });
+    document.querySelectorAll('.sl-route').forEach(b => b.classList.toggle('active', b.dataset.route === id));
   }
-
   function showLoader(show) { $('sl-loader').classList.toggle('active', show); }
-  function showError(msg) {
-    $('sl-error-msg').textContent = msg;
-    $('sl-error').classList.add('active');
-  }
+  function showError(msg) { $('sl-error-msg').textContent = msg; $('sl-error').classList.add('active'); }
   function hideError() { $('sl-error').classList.remove('active'); }
 
-  /* ================================================================
-     INIT
-  ================================================================ */
+  /* ---------- init ---------- */
   function init() {
-    // Carte
-    state.map = L.map('sl-map', { zoomControl: false })
-      .setView([45.75, 4.85], 9);
-
-    L.control.zoom({ position: 'topright' }).addTo(state.map);
-
+    state.map = L.map('sl-map', { zoomControl:false }).setView([45.75, 4.85], 9);
+    L.control.zoom({ position:'topright' }).addTo(state.map);
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(state.map);
 
-    // Boutons de parcours
     buildRouteButtons();
+    if (CONFIG.routes.length) loadRoute(CONFIG.routes[0].id);
 
-    // Charge le premier parcours
-    if (CONFIG.routes.length) {
-      loadRoute(CONFIG.routes[0].id);
-    }
-
-    // Resize
     let resizeT;
     window.addEventListener('resize', () => {
       clearTimeout(resizeT);
@@ -878,7 +567,6 @@ async function loadRoute(id) {
         if (state.currentData) renderElevation(state.currentData);
       }, 200);
     });
-
     if (window.ResizeObserver) {
       const ro = new ResizeObserver(() => {
         clearTimeout(resizeT);
@@ -888,15 +576,11 @@ async function loadRoute(id) {
       });
       ro.observe($('sl-elev-wrap'));
     }
-
     setTimeout(() => state.map.invalidateSize(), 300);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 </body>
