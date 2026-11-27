@@ -24,6 +24,8 @@
       display:flex; flex-direction:column;
       background:var(--bg); overflow:hidden;
     }
+
+    /* HEADER */
     #sl .sl-header {
       display:flex; align-items:center; justify-content:space-between;
       padding:10px 14px 9px; border-bottom:1px solid var(--border);
@@ -34,12 +36,8 @@
              white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     #sl .sl-subtitle { font-size:10px; color:var(--muted); margin-top:2px; font-weight:300;
                        white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    #sl .sl-badge {
-      display:inline-flex; align-items:center; gap:5px;
-      padding:6px 11px; border:1px solid var(--border); border-radius:2px;
-      background:var(--bg); color:var(--muted);
-      font-size:10px; font-weight:600; white-space:nowrap; flex-shrink:0;
-    }
+
+    /* CONTROLS */
     #sl .sl-controls {
       padding:8px 14px 7px; background:var(--bg);
       border-bottom:1px solid var(--border); flex-shrink:0;
@@ -54,23 +52,27 @@
       border:1px solid var(--border); border-radius:2px; color:var(--muted);
       cursor:pointer; transition:all 0.13s; user-select:none; white-space:nowrap;
       background:var(--bg); font-family:var(--font);
+      display:inline-flex; align-items:center; gap:5px;
     }
-    #sl .sl-route:hover { border-color:var(--blue); color:var(--blue); }
-    #sl .sl-route.active { background:var(--blue); color:#fff; border-color:var(--blue); }
+    #sl .sl-route:hover {
+      border-color:var(--route-color, var(--blue));
+      color:var(--route-color, var(--blue));
+    }
+    #sl .sl-route.active {
+      background:var(--route-color, var(--blue));
+      color:#fff;
+      border-color:var(--route-color, var(--blue));
+    }
+    #sl .sl-route-dot {
+      width:7px; height:7px; border-radius:50%;
+      background:var(--route-color, var(--blue)); flex-shrink:0;
+    }
+    #sl .sl-route.active .sl-route-dot { background:#fff; }
+
+    /* MAP */
     #sl .sl-map-wrap { position:relative; flex:1; min-height:0; z-index:1; }
     #sl #sl-map { width:100%; height:100%; }
-    #sl .sl-legend {
-      position:absolute; bottom:8px; left:8px; z-index:500;
-      background:rgba(255,255,255,0.97); border-radius:2px;
-      padding:6px 9px; font-size:10px; box-shadow:var(--shadow-sm);
-      pointer-events:none;
-    }
-    #sl .sl-legend-title {
-      font-weight:700; font-size:9px; text-transform:uppercase;
-      color:var(--blue); margin-bottom:4px;
-    }
-    #sl .sl-legend-row { display:flex; align-items:center; gap:5px; margin-bottom:2px; color:#333; }
-    #sl .sl-legend-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
     #sl .sl-overlay {
       position:absolute; inset:0; background:rgba(255,255,255,0.95);
       z-index:1000; display:flex; flex-direction:column; align-items:center;
@@ -85,6 +87,8 @@
       animation:sl-spin 0.75s linear infinite;
     }
     @keyframes sl-spin { to { transform:rotate(360deg); } }
+
+    /* ELEVATION */
     #sl .sl-elev-wrap {
       flex-shrink:0; background:var(--bg); border-top:1px solid var(--border);
       position:relative; height:100px;
@@ -96,6 +100,8 @@
       position:absolute; inset:0; display:flex; align-items:center;
       justify-content:center; font-size:11px; color:var(--muted); background:var(--bg);
     }
+
+    /* STATS */
     #sl .sl-stats {
       padding:7px 14px; background:var(--bg); border-top:1px solid var(--border);
       flex-shrink:0; display:grid; grid-template-columns:repeat(4,1fr); gap:0;
@@ -109,6 +115,8 @@
     #sl .sl-stat-label { font-size:8.5px; font-weight:700; color:var(--muted); text-transform:uppercase; }
     #sl .sl-stat-value { font-size:13.5px; font-weight:700; color:var(--blue); font-variant-numeric:tabular-nums; line-height:1.1; }
     #sl .sl-stat-sub { font-size:8.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-transform:uppercase; }
+
+    /* FOOTER */
     #sl footer {
       padding:4px 14px; background:var(--bg); border-top:1px solid var(--border-lt);
       display:flex; justify-content:space-between; align-items:center;
@@ -116,6 +124,8 @@
     }
     #sl footer a { color:#b0b5bc; text-decoration:none; }
     #sl footer a:hover { color:var(--blue); }
+
+    /* LEAFLET TOOLTIPS */
     .leaflet-tooltip {
       font-family:var(--font) !important; font-size:10px !important;
       font-weight:700 !important; background:#fff !important;
@@ -124,6 +134,8 @@
       padding:3px 7px !important; color:var(--text) !important;
     }
     .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before { display:none; }
+
+    /* RESPONSIVE */
     @media (max-width:540px) {
       #sl .sl-route { font-size:10px; padding:5px 8px; }
       #sl .sl-elev-wrap { height:80px; }
@@ -144,13 +156,6 @@
       <h1 id="sl-title">Les parcours de la SaintéLyon</h1>
       <div class="sl-subtitle" id="sl-subtitle">Chargement…</div>
     </div>
-    <div class="sl-badge">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-        <circle cx="12" cy="10" r="3"/>
-      </svg>
-      GPX
-    </div>
   </div>
 
   <div class="sl-controls">
@@ -160,12 +165,6 @@
 
   <div class="sl-map-wrap">
     <div id="sl-map"></div>
-    <div class="sl-legend">
-      <div class="sl-legend-title">Légende</div>
-      <div class="sl-legend-row"><span class="sl-legend-dot" style="background:#1B5E20"></span>Départ</div>
-      <div class="sl-legend-row"><span class="sl-legend-dot" style="background:#c0392b"></span>Arrivée</div>
-      <div class="sl-legend-row"><span class="sl-legend-dot" style="background:#0068B1"></span>Tracé</div>
-    </div>
 
     <div class="sl-overlay active" id="sl-loader">
       <div class="sl-spinner"></div>
@@ -217,17 +216,17 @@
   'use strict';
 
   /* ==============================================================
-     ⚙️ CONFIG — REMPLACEZ USERNAME/REPO
+     ⚙️ CONFIG
   ============================================================== */
   const CONFIG = {
     baseUrl: 'https://raw.githubusercontent.com/lucasbe-lpr/saintelyon2026/main/routes/',
     routes: [
-      { id: 'lyonsaintelyon', name: 'LyonSaintéLyon', files: ['ALLER LYONSAINTÉLYON.gpx', 'RETOUR LYONSAINTÉLYON.gpx'] },
-      { id: 'saintelyon',     name: 'SaintéLyon',     files: ['SAINTÉLYON.gpx'] },
-      { id: 'saintesprint',   name: 'SaintéSprint',   files: ['SAINTÉSPRINT.gpx'] },
-      { id: 'saintetic',      name: 'SaintéTic',      files: ['SAINTÉTIC.gpx'] },
-      { id: 'saintevia',      name: 'SaintéVia',      files: ['SAINTÉVIA.gpx'] },
-      { id: 'saintexpress',   name: 'SaintExpress',   files: ['SAINTEXPRESS.gpx'] }
+      { id: 'lyonsaintelyon', name: 'LyonSaintéLyon', color: '#0068B1', files: ['ALLER LYONSAINTÉLYON.gpx', 'RETOUR LYONSAINTÉLYON.gpx'] },
+      { id: 'saintelyon',     name: 'SaintéLyon',     color: '#1B5E20', files: ['SAINTÉLYON.gpx'] },
+      { id: 'saintesprint',   name: 'SaintéSprint',   color: '#c0392b', files: ['SAINTÉSPRINT.gpx'] },
+      { id: 'saintetic',      name: 'SaintéTic',      color: '#F9A825', files: ['SAINTÉTIC.gpx'] },
+      { id: 'saintevia',      name: 'SaintéVia',      color: '#7B1FA2', files: ['SAINTÉVIA.gpx'] },
+      { id: 'saintexpress',   name: 'SaintExpress',   color: '#00838F', files: ['SAINTEXPRESS.gpx'] }
     ]
   };
 
@@ -349,6 +348,7 @@
       const data = computeRouteData(points);
       data.name = route.name;
       data.id = id;
+      data.color = route.color || '#0068B1';
       state.cache[id] = data;
 
       if (state.activeId === id) { state.currentData = data; render(); }
@@ -372,23 +372,24 @@
     Object.values(state.layers).forEach(l => { if (l && state.map.hasLayer(l)) state.map.removeLayer(l); });
     state.layers = { polyline: null, start: null, end: null, hover: null };
     const latlngs = data.points.map(p => [p.lat, p.lon]);
+    const color = data.color || '#0068B1';
 
     state.layers.polyline = L.polyline(latlngs, {
-      color: '#0068B1', weight: 4, opacity: 0.9, lineJoin: 'round', lineCap: 'round'
+      color, weight: 4, opacity: 0.9, lineJoin: 'round', lineCap: 'round'
     }).addTo(state.map);
 
     state.layers.start = L.marker(latlngs[0], { icon: L.divIcon({
       className: '', iconSize: [14,14], iconAnchor: [7,7],
-      html: '<div style="width:14px;height:14px;background:#1B5E20;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.35)"></div>'
+      html: `<div style="width:12px;height:12px;background:#fff;border:3px solid ${color};border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.35)"></div>`
     })}).bindTooltip('Départ', { direction: 'top', offset: [0,-8] }).addTo(state.map);
 
     state.layers.end = L.marker(latlngs[latlngs.length-1], { icon: L.divIcon({
       className: '', iconSize: [14,14], iconAnchor: [7,7],
-      html: '<div style="width:14px;height:14px;background:#c0392b;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.35)"></div>'
+      html: `<div style="width:14px;height:14px;background:${color};border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.35)"></div>`
     })}).bindTooltip('Arrivée', { direction: 'top', offset: [0,-8] }).addTo(state.map);
 
     state.layers.hover = L.circleMarker(latlngs[0], {
-      radius: 6, color: '#fff', fillColor: '#0068B1', fillOpacity: 1, weight: 2, opacity: 0
+      radius: 6, color: '#fff', fillColor: color, fillOpacity: 1, weight: 2, opacity: 0
     }).addTo(state.map);
 
     state.map.fitBounds(data.bounds, { padding: [20, 20] });
@@ -409,7 +410,7 @@
     $('sl-subtitle').textContent = txt;
   }
 
-  /* ---------- profil ---------- */
+  /* ---------- profil altimétrique ---------- */
   function renderElevation(data) {
     const svg = $('sl-elev-svg'), emptyEl = $('sl-elev-empty'), container = $('sl-elev-wrap');
     if (!data.elevations || data.stats.altMin == null) {
@@ -419,7 +420,8 @@
     const W = container.clientWidth, H = container.clientHeight;
     if (W < 10 || H < 10) return;
 
-    const pad = { top:16, right:16, bottom:22, left:16 };
+    const color = data.color || '#0068B1';
+    const pad = { top: 10, right: 16, bottom: 22, left: 12 };
     const cw = W - pad.left - pad.right, ch = H - pad.top - pad.bottom;
     const { distances, elevations, stats } = data;
     const totalDist = distances[distances.length-1];
@@ -447,16 +449,12 @@
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
     svg.innerHTML = `
       <defs><linearGradient id="sl-grad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#0068B1" stop-opacity="0.38"/>
-        <stop offset="100%" stop-color="#0068B1" stop-opacity="0.02"/>
+        <stop offset="0%" stop-color="${color}" stop-opacity="0.38"/>
+        <stop offset="100%" stop-color="${color}" stop-opacity="0.02"/>
       </linearGradient></defs>
       <path d="${areaParts.join(' ')}" fill="url(#sl-grad)"/>
-      <path d="${lineParts.join(' ')}" fill="none" stroke="#0068B1" stroke-width="1.6"
+      <path d="${lineParts.join(' ')}" fill="none" stroke="${color}" stroke-width="1.6"
             stroke-linejoin="round" stroke-linecap="round"/>
-      <text x="${pad.left+2}" y="${pad.top-4}" font-family="Merriweather Sans, sans-serif"
-            font-size="9" font-weight="700" fill="#0068B1">${fmt(maxE,0)} m</text>
-      <text x="${pad.left+2}" y="${pad.top+ch+12}" font-family="Merriweather Sans, sans-serif"
-            font-size="9" font-weight="700" fill="#9E9E9E">${fmt(minE,0)} m</text>
       <text x="${(pad.left+cw).toFixed(1)}" y="${H-4}" text-anchor="end"
             font-family="Merriweather Sans, sans-serif" font-size="9" font-weight="600"
             fill="#9E9E9E">${fmt(totalDist/1000,0)} km</text>
@@ -464,10 +462,10 @@
             font-size="9" font-weight="600" fill="#9E9E9E">0 km</text>
       <g id="sl-hover-g" style="display:none;pointer-events:none">
         <line id="sl-hover-line" x1="0" y1="${pad.top}" x2="0" y2="${pad.top+ch}"
-              stroke="#0068B1" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
-        <circle id="sl-hover-dot" r="3.5" fill="#0068B1" stroke="#fff" stroke-width="1.5"/>
+              stroke="${color}" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
+        <circle id="sl-hover-dot" r="3.5" fill="${color}" stroke="#fff" stroke-width="1.5"/>
         <rect id="sl-hover-bg" x="0" y="0" width="100" height="16" rx="2"
-              fill="#0068B1" opacity="0.92"/>
+              fill="${color}" opacity="0.92"/>
         <text id="sl-hover-txt" x="0" y="0" font-family="Merriweather Sans, sans-serif"
               font-size="9.5" font-weight="700" fill="#fff" text-anchor="middle">0 km · 0 m</text>
       </g>
@@ -534,8 +532,11 @@
     const c = $('sl-routes'); c.innerHTML = '';
     CONFIG.routes.forEach(r => {
       const b = document.createElement('button');
-      b.type = 'button'; b.className = 'sl-route';
-      b.dataset.route = r.id; b.textContent = r.name;
+      b.type = 'button';
+      b.className = 'sl-route';
+      b.dataset.route = r.id;
+      b.style.setProperty('--route-color', r.color || '#0068B1');
+      b.innerHTML = `<span class="sl-route-dot"></span><span>${r.name}</span>`;
       b.addEventListener('click', () => { if (state.activeId !== r.id) loadRoute(r.id); });
       c.appendChild(b);
     });
